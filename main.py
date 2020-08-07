@@ -6,7 +6,7 @@ from flask import Flask
 from utils.db import mysql
 
 #? Importovanje flas blueprint fajlova
-from blueprints.placeholder import placeholder_blueprint
+from blueprints.parts import parts_blueprint
 
 app = Flask(__name__, static_url_path="")
 
@@ -18,7 +18,7 @@ app.config["MYSQL_DATABASE_DB"] = "pcparts_db"
 mysql.init_app(app) 
 
 #? Dodavanje blueprintova na flask applikaciju
-app.register_blueprint(placeholder_blueprint, url_prefix="/api")
+app.register_blueprint(parts_blueprint, url_prefix="/api")
 
 @app.route("/")
 @app.route("/index")
