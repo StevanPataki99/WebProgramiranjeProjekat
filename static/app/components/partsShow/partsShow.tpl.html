@@ -1,0 +1,56 @@
+<div class="row">
+   
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Picture</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat="part in pctrl.parts">
+                    
+                    <td><img ng-src="./static/img/{{part['part_image']}}" alt="{{part['part_image']}}" width="200" height="200" /></td>
+                   
+                    <!-- <td><a ui-sref="korisnikPrikaz({id:p['id']})">{{p["ime"]}}</a></td> -->
+                    <td>{{part["part_name"]}}</td>
+                    <td>{{part["part_price"]}}</td>
+                    
+                    <!-- <td><button class="btn btn-active" ng-click="pctrl.ukloniKorisnika(p['id'])">Ukloni</button></td> -->
+                    <td><button class="btn btn-info" ng-click="console.log(part['id'])">Order</button></td>
+                    <!-- <td> <a ui-sref="izmenaKorisnika({id: p['id']})">Izmeni</a></td> -->
+                </tr>
+            </tbody>
+        </table>
+        <!-- <table class="table">
+            <thead>
+                <tr>
+                    <th>Redni broj</th>
+                    <th>Naziv</th>
+                    <th>Skraćenica</th>
+                    <th>Obrisi</th>
+                    <th>Izmeni</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr ng-repeat="p in pctrl.predmet">
+                   
+                    <td>{{$index+1}}.</td>
+                    
+                    <td><a ui-sref="predmetPrikazCtrl({id: p['id']})">{{p["naziv"]}}</a></td>
+                    <td>{{p["skracenica"]}}</td>
+                    
+                    <td><button class="btn btn-danger" ng-click="pctrl.ukloniPredmet(p['id'])">Ukloni</button></td>
+                    <td> <a ui-sref="predmetIzmenaCtrl({id: p['id']})">Izmeni</a></td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+</div>

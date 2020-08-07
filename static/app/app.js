@@ -9,8 +9,8 @@
         $stateProvider.state({
             name: "home",
             url: "/",
-            templateUrl: "app/components/korisnik/korisnici.tpl.html",
-            controller: "korisniciCtrl",
+            templateUrl: "app/components/partsShow/partsShow.tpl.html",
+            controller: "partsShowCtrl",
             controllerAs: "pctrl" 
         }).state({
             name: "korisnikPrikaz", 
