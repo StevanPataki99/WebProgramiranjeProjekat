@@ -23,7 +23,8 @@
                     <td>{{part["part_price"]}}</td>
                     
                     <!-- <td><button class="btn btn-active" ng-click="pctrl.ukloniKorisnika(p['id'])">Ukloni</button></td> -->
-                    <td><button class="btn btn-info" ng-click="console.log(part['id'])">Order</button></td>
+                    <td><a ui-sref="partShow({part_id: part['part_id']})">Order</a></td>
+                    <!-- <td><button class="btn btn-info" ng-click="partShow({part_id: part['part_id']})">Order</button></td> -->
                     <!-- <td> <a ui-sref="izmenaKorisnika({id: p['id']})">Izmeni</a></td> -->
                 </tr>
             </tbody>

@@ -12,3 +12,14 @@ def get_parts():
 
     parts = cursor.fetchall()
     return flask.jsonify(parts)
+
+@parts_blueprint.route("/part/<int:part_id>", methods=['GET'])
+def get_part(part_id):
+    cursor = mysql.get_db().cursor()
+    cursor.execute("SELECT * FROM pc_parts WHERE part_id=%s",(part_id))
+    
+    part = cursor.fetchall()
+    if part is not None:
+        return flask.jsonify(part)
+    else:
+        return "", 404

@@ -18,6 +18,12 @@
             templateUrl: "app/components/korisnik-prikaz/korisnikPrikaz.tpl.html",
             controller: "korisnikPrikazCtrl",
             controllerAs: "pctrl"
+        }).state({
+            name: "partShow", 
+            url: "/partShowCtrl/{part_id}",
+            templateUrl: "app/components/partShow/partShow.tpl.html",
+            controller: "partShowCtrl",
+            controllerAs: "pctrl"
         })
         $urlRouterProvider.otherwise("/")
     }])
