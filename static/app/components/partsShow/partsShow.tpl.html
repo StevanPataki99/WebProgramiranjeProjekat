@@ -4,6 +4,14 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Order By Filters:</th>
+                    <th><button class="btn btn-primary" ng-click="pctrl.getParts()">Reset</button></th>
+                    <th><button class="btn btn-primary" ng-click="pctrl.getPartsPriceAbc()">Alphabetical</button></th>
+                    <th><button class="btn btn-primary" ng-click="pctrl.getPartsPriceUp()">Price Up</button></th>
+                    <th><button class="btn btn-primary" ng-click="pctrl.getPartsPriceDown()">Price Down</button></th>
+                    <th></th>
+                </tr>
+                <tr>
                     <th>Picture</th>
                     <th>Product Name</th>
                     <th>Price</th>
@@ -14,7 +22,7 @@
             </thead>
             <tbody>
                
-                <tr ng-repeat="part in pctrl.parts">
+                <tr ng-repeat="part in parts">
                     
                     <td><img ng-src="./static/img/{{part['part_image']}}" alt="{{part['part_image']}}" width="200" height="200" /></td>
                    
