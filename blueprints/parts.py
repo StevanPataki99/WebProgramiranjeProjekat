@@ -5,6 +5,8 @@ from utils.db import mysql
 
 parts_blueprint = Blueprint("parts_blueprint", __name__)
 
+#! Get all Parts and Filters
+
 @parts_blueprint.route("/parts", methods=['GET'])
 def get_parts():
     cursor = mysql.get_db().cursor()
@@ -36,6 +38,7 @@ def get_partsPriceAbc():
 
     parts = cursor.fetchall()
     return flask.jsonify(parts)
+#! Get one part
 
 @parts_blueprint.route("/part/<int:part_id>", methods=['GET'])
 def get_part(part_id):
@@ -47,3 +50,14 @@ def get_part(part_id):
         return flask.jsonify(part)
     else:
         return "", 404
+
+#! Search Parts
+
+@parts_blueprint.route("/partSearch/<part_search>", methods=['GET'])
+def search_part(part_search):
+    cursor = mysql.get_db().cursor()
+
+    cursor.execute("SELECT * FROM pc_parts WHERE( part_name LIKE '%" + part_search + "%' OR part_manufacturer LIKE '%" + part_search +"%')")
+
+    parts = cursor.fetchall()
+    return flask.jsonify(parts)

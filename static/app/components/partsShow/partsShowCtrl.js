@@ -51,6 +51,17 @@
             });
         }
 
+        this.searchParts = function() {
+            $http.get("api/partSearch/" + $scope.searchValue).then(function(result){
+                console.log(result);
+                $scope.parts = result.data;
+                console.log($scope.parts)
+            },
+            function(reason) {
+                console.log(reason);
+            });
+        }
+
         this.getParts();
 
     }]);
