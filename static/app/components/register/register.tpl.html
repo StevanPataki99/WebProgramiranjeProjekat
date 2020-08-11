@@ -1,0 +1,43 @@
+<div class="row">
+    <h3>Registration </h3>
+    <br>
+        <div class="col-12">
+            <form ng-submit="pctrl.register()" name="registerForm" method="POST">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" class="form-control" ng-model="pctrl.user.name" maxlength="45" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" ng-model="pctrl.user.email" maxlength="45" required>
+                </div>
+                <div class="form-group">
+                    <label for="phonenumber">Phonenumber:</label>
+                    <input type="text"  name="phonenumber" id="phonenumber" class="form-control" ng-model="pctrl.user.phonenumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password"  name="password" id="password" class="form-control" ng-model="pctrl.user.password" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <input type="text"  name="country" id="country" class="form-control" ng-model="pctrl.user.country" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text"  name="city" id="city" class="form-control" ng-model="pctrl.user.city" required>
+                </div>
+                <div class="form-group">
+                    <label for="streetName">Street Name:</label>
+                    <input type="text"  name="streetName" id="streetName" class="form-control" ng-model="pctrl.user.streetName" required>
+                </div>
+                <div class="form-group">
+                    <label for="streetNumber">Street Number:</label>
+                    <input type="text"  name="streetNumber" id="streetNumber" class="form-control" ng-model="pctrl.user.streetNumber" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Register Now" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+</div>

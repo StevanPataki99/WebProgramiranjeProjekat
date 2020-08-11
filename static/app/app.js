@@ -24,6 +24,18 @@
             templateUrl: "app/components/partShow/partShow.tpl.html",
             controller: "partShowCtrl",
             controllerAs: "pctrl"
+        }).state({
+            name: "logIn",
+            url: "/logInCtrl",
+            templateUrl: "app/components/logIn/Login.tpl.html",
+            controller: "logInCtrl",
+            controllerAs: "pctrl"
+        }).state({
+            name: "register",
+            url: "/registerCtrl",
+            templateUrl: "app/components/register/register.tpl.html",
+            controller: "registerCtrl",
+            controllerAs: "pctrl"
         })
         $urlRouterProvider.otherwise("/")
     }])
