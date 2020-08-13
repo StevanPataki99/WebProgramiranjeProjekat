@@ -6,26 +6,22 @@
     app.controller("logInCtrl", ["$http" , "$state", "$stateParams", "$scope", function($http, $state, $stateParams, $scope) {
         var that = this;
 
-        this.part = [];
+        this.user = {
+            "email" : "",
+            "password" : ""
+        };
 
-        this.getPart = function(part_id) {
-            $http.get("api/part/" + part_id).then(function(result){
+        this.logIn = function() {
+            $http.post("api/userLogIn", that.user).then(function(result){
                 console.log(result);
-                that.part = result.data;
+                window.alert("User successfully loged in.")
+                $state.go("home");
             },
             function(reason){
                 console.log(reason);
+                window.alert("Something wen wrong! User did not log in try again.")
             })
         }
-
-        $scope.order = function(){
-            console.log("Ovde ide provera validnosti porudzbine")
-            console.log($scope.pices)
-        };
-        
-
-        // this.getPart($stateParams['part_id']);
-        
 
     }]);
 })(angular);

@@ -8,7 +8,6 @@ user_blueprint = Blueprint("user_blueprint", __name__)
 
 @user_blueprint.route("/user", methods=['POST'])
 def user_register():
-    #TODO doadati da se korisnik uspesno upise u bazu 
     db = mysql.get_db()
     cursor = db.cursor()
 
@@ -56,15 +55,32 @@ def user_register():
 
     return flask.jsonify(flask.request.json), 201
 
-# @user_blueprint.route("/userCountry", methods=['POST'])
-# def user_register():
-#     #TODO doadati da se korisnik uspesno upise u bazu 
-#     db = mysql.get_db()
-#     cursor = db.cursor()
+@user_blueprint.route("/userLogIn", methods=['POST'])
+def user_log_in():
+    db = mysql.get_db()
+    cursor = db.cursor()
 
-#     print(flask.request.json)
-#     #cursor.execute("INSERT INTO predmet(naziv, skracenica) VALUES(%(naziv)s, %(skracenica)s)", flask.request.json)
+    print(flask.request.json)
+    cursor.execute("SELECT * FROM user WHERE user_email=%(email)s AND user_password=%(password)s", flask.request.json)
+    user = cursor.fetchone()
+    print(user)
 
-#     #db.commit() 
+    if user is not None:
+        flask.session['user'] = user['user_email']
+        return "", 202
+    else:
+        return "", 404
 
-#     return flask.jsonify(flask.request.json), 201
+
+    db.commit() 
+
+    return flask.jsonify(flask.request.json), 201
+
+@user_blueprint.route("/logout", methods=["GET"])
+def logout():
+    flask.session.pop("user", None)
+    return "", 200
+
+@user_blueprint.route("/currentUser", methods=["GET"])
+def current_user():
+    return flask.jsonify(flask.session.get("user")), 200

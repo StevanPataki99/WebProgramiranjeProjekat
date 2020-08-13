@@ -15,6 +15,7 @@ app = Flask(__name__, static_url_path="")
 app.config["MYSQL_DATABASE_USER"] = "root" 
 app.config["MYSQL_DATABASE_PASSWORD"] = "rootroot" 
 app.config["MYSQL_DATABASE_DB"] = "pcparts_db" 
+app.config["SECRET_KEY"] = "secret"
 
 mysql.init_app(app) 
 
