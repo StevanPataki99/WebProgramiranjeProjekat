@@ -66,7 +66,7 @@ def user_log_in():
     print(user)
 
     if user is not None:
-        flask.session['user'] = user['user_email']
+        flask.session['user'] = user['user_id']
         return "", 202
     else:
         return "", 404

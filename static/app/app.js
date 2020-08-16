@@ -36,6 +36,17 @@
             templateUrl: "app/components/register/register.tpl.html",
             controller: "registerCtrl",
             controllerAs: "pctrl"
+        }).state({
+            name: "orderPart",
+            url: "/orderPartCtrl",
+            templateUrl: "app/components/orderPart/orderPart.tpl.html",
+            controller: "orderPartCtrl",
+            controllerAs: "pctrl",
+            params: {
+                part_id: null,
+                user_id: null,
+                pices: null
+            }
         })
         $urlRouterProvider.otherwise("/")
     }])
