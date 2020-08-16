@@ -1,7 +1,29 @@
 <div class="row">
     <ul style="list-style: none;">
-        <li><h4>{{part_id}}</h4></li>
-        <li><h4>{{user_id}}</h4></li>
-        <li><h4>{{pices}}</h4></li>
+        <li><h4>User: {{user['user_name']}} want's to order Part: {{part['part_name']}}, Quantity: {{pices}}, total price: {{price}}$, order Date: {{order_date}}</h4></li>
+        <li><h5>Fill in order form to order: </h5></li>
     </ul>
+    <div class="col-12">
+        <form ng-submit="pctrl.order()" name="OrderForm" method="POST">
+            <div class="form-group">
+                <label for="">Country:</label>
+                <input type="text" name="country" id="country" class="form-control" ng-model="form_data[1]['country_name']" maxlength="45" required>
+            </div>
+            <div class="form-group">
+                <label for="">City:</label>
+                <input type="text" name="city" id="city" class="form-control" ng-model="form_data[1]['city_name']" maxlength="45" required>
+            </div>
+            <div class="form-group">
+                <label for="">Adress Street Name:</label>
+                <input type="text" name="street_name" id="street_name" class="form-control" ng-model="form_data[1]['adress_street']" maxlength="45" required>
+            </div>
+            <div class="form-group">
+                <label for="">Adress street number:</label>
+                <input type="text" name="street_number" id="street_number" class="form-control" ng-model="form_data[1]['adress_number']" maxlength="45" required>
+            </div>
+            <div class="form-group">
+                <input class ="btn btn-primary" type="submit" value="Order Now">
+            </div>
+        </form>
+    </div>
  </div>

@@ -84,3 +84,14 @@ def logout():
 @user_blueprint.route("/currentUser", methods=["GET"])
 def current_user():
     return flask.jsonify(flask.session.get("user")), 200
+
+@user_blueprint.route("/user/<int:user_id>", methods=["GET"])
+def getUser(user_id):
+    cursor = mysql.get_db().cursor()
+    cursor.execute("SELECT * FROM user WHERE user_id=%s",(user_id))
+    
+    part = cursor.fetchall()
+    if part is not None:
+        return flask.jsonify(part)
+    else:
+        return "", 404
