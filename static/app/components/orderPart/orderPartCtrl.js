@@ -22,11 +22,8 @@
         console.log($stateParams['user_id'])
         console.log($stateParams['pices'])
 
-        $scope.form_data = [
-            {"order_date" : $scope.order_date, "order_price" : "", "order_status" : ""},
-            {"country_name" : "", "city_name" : "", "adress_street" : "", "adress_number" : ""},
-            {"user_id" : "", "part_id" : "", "pices" : ""}
-        ]
+        $scope.form_data = { "order_date" : $scope.order_date, "order_price" : "", "order_status" : "", "country_name" : "", "city_name" : "", "adress_street" : "", "adress_number" : "", "user_id" : "", "part_id" : "", "pices" : ""
+        }
 
         this.getPart = function(part_id) {
             $http.get("api/part/" + part_id).then(function(result){
@@ -54,12 +51,12 @@
         }
 
         this.order = function() {
-            $scope.form_data[0]["order_date"] = $scope.order_date;
-            $scope.form_data[0]["order_price"] = $scope.part["part_price"] * $scope.pices;
-            $scope.form_data[0]["order_status"] = "ORDERD";
-            $scope.form_data[2]["user_id"] = $scope.user_id;
-            $scope.form_data[2]["part_id"] = $scope.part_id;
-            $scope.form_data[2]["pices"] = $scope.pices;
+            $scope.form_data["order_date"] = $scope.order_date;
+            $scope.form_data["order_price"] = $scope.part["part_price"] * $scope.pices;
+            $scope.form_data["order_status"] = "ORDERD";
+            $scope.form_data["user_id"] = $scope.user_id;
+            $scope.form_data["part_id"] = $scope.part_id;
+            $scope.form_data["pices"] = $scope.pices;
             console.log($scope.form_data);
             window.alert("Here we will simulate filling out youre credit card details");
             that.sendOrder();
