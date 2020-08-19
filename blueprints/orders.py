@@ -38,7 +38,7 @@ def create_order():
     response["adress_street"] = temp[0]["adress_id"]
 
     print(response)
-    #cursor.execute("INSERT INTO order (order_price, order_date, order_status, user_user_id, adress_adress_id, adress_city_city_id) VALUES(%(order_price)f, %(order_date)s, %(order_status)s, %(user_id)i, %(adress_street)i, %(city_name)i)", response)
+    #! OVAJ QUERY NE RADI
     cursor.execute("INSERT INTO orders (order_price, order_date, order_status, user_user_id, adress_adress_id, adress_city_city_id) VALUES(%(order_price)s, %(order_date)s, %(order_status)s, %(user_id)s, %(adress_street)s, %(city_name)s)", response)
     db.commit()
 
