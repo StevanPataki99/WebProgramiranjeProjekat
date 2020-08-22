@@ -36,6 +36,13 @@
             templateUrl: "app/components/register/register.tpl.html",
             controller: "registerCtrl",
             controllerAs: "pctrl"
+        })
+        .state({
+            name: "logout",
+            url: "/logoutCtrl",
+            templateUrl: "app/components/logout/logout.tpl.html",
+            controller: "logoutCtrl",
+            controllerAs: "pctrl"
         }).state({
             name: "orderPart",
             url: "/orderPartCtrl",
