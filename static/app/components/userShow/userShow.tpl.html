@@ -1,0 +1,43 @@
+<div class="row">
+    <ul style="list-style: none;">
+        <li><h4>User: {{userData[0]['user_name']}}</h4></li>
+        <li><p>Email: {{userData[0]['user_email']}}</p></li>
+        <li><p>Phone Number: {{userData[0]['user_phonenumber']}}</p></li>
+        <li><p>Street Name: {{userData[1]['adress_street_name']}} Years</p></li>
+        <li><p>Street Number: {{userData[1]['adress_street_number']}}</p></li>
+        <li><p>City Name: {{userData[2]['city_name']}}</p></li>
+        <li><p>Country: {{userData[3]['country_name']}}</p></li>
+        <br>
+        <li><button class="btn btn-info" ng-click="">Edit</button></li>
+    </ul>
+    <br>
+    <h3>Current Orders</h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Price</th>
+                <th>Order Date</th>
+                <th>Part ID</th>
+                <th>Order Adress</th>
+                <th>Order Cancle</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr ng-repeat="order in orders">
+                
+                <!-- <td><a ui-sref="korisnikPrikaz({id:p['id']})">{{p["ime"]}}</a></td> -->
+                <td>{{order["order_id"]}}</td>
+                <td>{{order["order_price"]}}</td>
+                <td>{{order["order_date"]}}</td>
+                <td><button class="btn btn-active" ng-click="pctrl.showpart(order['order_id'])">Parts</button></td>
+                <td><button class="btn btn-active" ng-click="pctrl.showadress(order['adress_adress_id'])">{{order["adress_adress_id"]}}</button></td>
+                <td><button class="btn btn-active" ng-click="pctrl.deleteorder(order['order_id'])">Cancle</button></td>
+                <!-- <td><button class="btn btn-info" ng-click="partShow({part_id: part['part_id']})">Order</button></td> -->
+                <!-- <td> <a ui-sref="izmenaKorisnika({id: p['id']})">Izmeni</a></td> -->
+            </tr>
+        </tbody>
+    </table>
+ </div>

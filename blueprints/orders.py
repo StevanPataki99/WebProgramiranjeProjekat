@@ -59,3 +59,104 @@ def create_order():
     print("IZVRSENO")
 
     return flask.jsonify(flask.request.json), 201
+
+@orders_blueprint.route("/order/<int:user_id>", methods=['GET'])
+def get_valid_order(user_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    query = {"user_id" : user_id, "order_status" : "ORDERD"}
+
+    cursor.execute("SELECT * FROM orders WHERE user_user_id=%(user_id)s AND order_status=%(order_status)s", query)
+    orders = cursor.fetchall()
+
+    print(orders)
+
+    
+
+    return flask.jsonify(orders)
+
+@orders_blueprint.route("/order_adress/<int:adress_id>", methods=['GET'])
+def get_adress_order(adress_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    cursor.execute("SELECT * FROM adress WHERE adress_id=%s", (adress_id))
+    adress = cursor.fetchall()
+    print(adress)
+
+    cursor.execute("SELECT * FROM city WHERE city_id=%s", (adress[0]["city_city_id"]))
+    adress = adress + cursor.fetchall()
+
+
+    cursor.execute("SELECT * FROM country WHERE country_id=%s", (adress[1]["country_country_id"]))
+    adress = adress + cursor.fetchall()
+
+    print(adress)
+
+    return flask.jsonify(adress)
+
+@orders_blueprint.route("/order_parts/<int:order_id>", methods=['GET'])
+def get_parts_order(order_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+    
+    cursor.execute("SELECT pc_parts_part_id FROM orders_has_pc_parts WHERE orders_order_id=%s", (order_id))
+    part_id = cursor.fetchall()
+
+    cursor.execute("SELECT order_price FROM orders WHERE order_id=%s", (order_id))
+    part = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM pc_parts WHERE part_id=%s", (part_id[0]["pc_parts_part_id"]))
+    part = part + cursor.fetchall()
+
+    return flask.jsonify(part)
+
+@orders_blueprint.route("/order/<int:order_id>", methods=['DELETE'])
+def delete_order(order_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    cursor.execute("SELECT order_price FROM orders WHERE order_id=%s", (order_id))
+
+    order_price = cursor.fetchall()
+
+    print(order_price)
+
+    cursor.execute("SELECT pc_parts_part_id FROM orders_has_pc_parts WHERE orders_order_id=%s", (order_id))
+
+    part_id = cursor.fetchall()
+
+    cursor.execute("SELECT part_price FROM pc_parts WHERE part_id=%s", (part_id[0]['pc_parts_part_id']))
+
+    part_price = cursor.fetchall()
+
+    print(part_price)
+
+    order_part_number =int(order_price[0]['order_price'] / part_price[0]['part_price'])
+
+    print(order_part_number)
+
+    cursor.execute("SELECT part_stock FROM pc_parts WHERE part_id=%s", (part_id[0]['pc_parts_part_id']))
+
+    part_stock = cursor.fetchall()
+
+    part_stock = part_stock[0]['part_stock'] + order_part_number
+
+    print(part_stock)
+    
+    cursor.execute("DELETE FROM orders_has_pc_parts WHERE orders_order_id=%s", (order_id))
+
+    cursor.execute("DELETE FROM orders WHERE order_id=%s", (order_id))
+
+    db.commit()
+
+    update_part = {"part_stock": part_stock, "part_id": part_id[0]['pc_parts_part_id']}
+
+    print(update_part)
+
+    cursor.execute("UPDATE pc_parts SET part_stock=%(part_stock)s WHERE part_id=%(part_id)s", update_part)
+
+    db.commit()
+
+    return "", 204

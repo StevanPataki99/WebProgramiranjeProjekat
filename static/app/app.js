@@ -44,6 +44,12 @@
             controller: "logoutCtrl",
             controllerAs: "pctrl"
         }).state({
+            name: "userShow",
+            url: "/userShowCtrl",
+            templateUrl: "app/components/userShow/userShow.tpl.html",
+            controller: "userShowCtrl",
+            controllerAs: "pctrl"
+        }).state({
             name: "orderPart",
             url: "/orderPartCtrl",
             templateUrl: "app/components/orderPart/orderPart.tpl.html",

@@ -90,8 +90,19 @@ def getUser(user_id):
     cursor = mysql.get_db().cursor()
     cursor.execute("SELECT * FROM user WHERE user_id=%s",(user_id))
     
-    part = cursor.fetchall()
-    if part is not None:
-        return flask.jsonify(part)
+    user = cursor.fetchall()
+
+    cursor.execute("SELECT adress_street_name, adress_street_number FROM adress WHERE adress_id=%s",(user[0]['adress_adress_id']))
+    user = user + cursor.fetchall()
+
+    cursor.execute("SELECT city_name, country_country_id FROM city WHERE city_id=%s",(user[0]['adress_city_city_id']))
+    user = user + cursor.fetchall()
+
+    cursor.execute("SELECT country_name FROM country WHERE country_id=%s",(user[2]['country_country_id']))
+    user = user + cursor.fetchall()
+
+    print(user)
+    if user is not None:
+        return flask.jsonify(user)
     else:
         return "", 404
