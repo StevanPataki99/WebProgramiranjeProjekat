@@ -50,6 +50,12 @@
             controller: "userShowCtrl",
             controllerAs: "pctrl"
         }).state({
+            name: "userEdit",
+            url: "/userEditCtrl/{user_id}",
+            templateUrl: "app/components/userEdit/userEdit.tpl.html",
+            controller: "userEditCtrl",
+            controllerAs: "pctrl"
+        }).state({
             name: "orderPart",
             url: "/orderPartCtrl",
             templateUrl: "app/components/orderPart/orderPart.tpl.html",

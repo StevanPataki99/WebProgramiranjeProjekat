@@ -76,6 +76,22 @@ def get_valid_order(user_id):
 
     return flask.jsonify(orders)
 
+@orders_blueprint.route("/orderDone/<int:user_id>", methods=['GET'])
+def get_done_order(user_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    query = {"user_id" : user_id, "order_status" : "DONE"}
+
+    cursor.execute("SELECT * FROM orders WHERE user_user_id=%(user_id)s AND order_status=%(order_status)s", query)
+    orders = cursor.fetchall()
+
+    print(orders)
+
+    
+
+    return flask.jsonify(orders)
+
 @orders_blueprint.route("/order_adress/<int:adress_id>", methods=['GET'])
 def get_adress_order(adress_id):
     db = mysql.get_db()

@@ -8,6 +8,7 @@
 
         $scope.userData = null;
         $scope.orders = null;
+        $scope.ordersDone = null;
 
         this.getCurrentUserId = function() {
             $http.get("api/currentUser").then(function(result){
@@ -20,6 +21,7 @@
                     console.log(that.user);
                     that.getCurrentUserData();
                     that.getValidOrders();
+                    that.getDoneOrders();
                 }
             },
             function(reason){
@@ -43,6 +45,17 @@
                 console.log(result);
                 $scope.orders = result.data;
                 console.log($scope.orders);
+            },
+            function(reason){
+                console.log(reason);
+            })
+        }
+
+        this.getDoneOrders = function(){
+            $http.get("api/orderDone/" + that.user).then(function(result){
+                console.log(result);
+                $scope.ordersDone = result.data;
+                console.log($scope.ordersDone);
             },
             function(reason){
                 console.log(reason);

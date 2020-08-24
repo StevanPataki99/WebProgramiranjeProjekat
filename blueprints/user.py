@@ -106,3 +106,31 @@ def getUser(user_id):
         return flask.jsonify(user)
     else:
         return "", 404
+
+@user_blueprint.route("/user/<int:user_id>", methods=["PUT"])
+def editUser(user_id):
+    print("USO USO USO USP")
+    db = mysql.get_db()
+    cursor = db.cursor()
+    data = flask.request.json
+    print(data)
+
+    country = {"country_id" : data[2]['country_country_id'], "country_name" : data[3]['country_name']}
+
+    city = {"city_id" : data[0]['adress_city_city_id'], "city_name" : data[2]['city_name']}
+
+    adress = {"adress_id" : data[0]['adress_adress_id'], "adress_street_name" : data[1]['adress_street_name'], "adress_street_number" : data[1]['adress_street_number']}
+
+    user = {"user_id" : data[0]['user_id'], "user_email" : data[0]['user_email'], "user_name" : data[0]['user_name'], "user_password" : data[0]['user_password'], "user_phonenumber" : data[0]['user_phonenumber']}
+
+    cursor.execute("UPDATE country SET country_name=%(country_name)s WHERE country_id=%(country_id)s", country)
+
+    cursor.execute("UPDATE city SET city_name=%(city_name)s WHERE city_id=%(city_id)s", city)
+
+    cursor.execute("UPDATE adress SET adress_street_name=%(adress_street_name)s, adress_street_number=%(adress_street_number)s WHERE adress_id=%(adress_id)s", adress)
+
+    cursor.execute("UPDATE user SET user_name=%(user_name)s, user_email=%(user_email)s, user_password=%(user_password)s, user_phonenumber=%(user_phonenumber)s WHERE user_id=%(user_id)s", user)
+
+    db.commit()
+
+    return "", 200
