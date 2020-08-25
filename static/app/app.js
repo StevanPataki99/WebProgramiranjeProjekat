@@ -56,6 +56,12 @@
             controller: "userEditCtrl",
             controllerAs: "pctrl"
         }).state({
+            name: "admin",
+            url: "/adminCtrl",
+            templateUrl: "app/components/admin/admin.tpl.html",
+            controller: "adminCtrl",
+            controllerAs: "pctrl"
+        }).state({
             name: "orderPart",
             url: "/orderPartCtrl",
             templateUrl: "app/components/orderPart/orderPart.tpl.html",

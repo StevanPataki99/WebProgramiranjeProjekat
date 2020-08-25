@@ -60,6 +60,22 @@ def create_order():
 
     return flask.jsonify(flask.request.json), 201
 
+@orders_blueprint.route("/order", methods=['GET'])
+def get_all_valid_order():
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    query = {"order_status" : "ORDERD"}
+
+    cursor.execute("SELECT * FROM orders WHERE order_status=%(order_status)s", query)
+    orders = cursor.fetchall()
+
+    print(orders)
+
+    
+
+    return flask.jsonify(orders)
+
 @orders_blueprint.route("/order/<int:user_id>", methods=['GET'])
 def get_valid_order(user_id):
     db = mysql.get_db()
@@ -172,6 +188,17 @@ def delete_order(order_id):
     print(update_part)
 
     cursor.execute("UPDATE pc_parts SET part_stock=%(part_stock)s WHERE part_id=%(part_id)s", update_part)
+
+    db.commit()
+
+    return "", 204
+
+@orders_blueprint.route("/order_complete/<int:order_id>", methods=['PUT'])
+def complete_order(order_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    cursor.execute("UPDATE orders SET order_status='DONE' WHERE order_id=%s", (order_id))
 
     db.commit()
 
