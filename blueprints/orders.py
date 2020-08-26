@@ -200,6 +200,8 @@ def complete_order(order_id):
 
     cursor.execute("UPDATE orders SET order_status='DONE' WHERE order_id=%s", (order_id))
 
+    cursor.execute("DELETE FROM orders_has_pc_parts WHERE orders_order_id=%s", (order_id))
+
     db.commit()
 
     return "", 204

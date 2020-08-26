@@ -29,31 +29,46 @@
                 <td><button class="btn btn-active" ng-click="pctrl.deleteorder(order['order_id'])">Cancle</button></td>
                 <td><button class="btn btn-active" ng-click="pctrl.completeorder(order['order_id'])">Complete</button></td>
                 <!-- <td><button class="btn btn-info" ng-click="partShow({part_id: part['part_id']})">Order</button></td> -->
+                
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <h3>All parts</h3>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Part ID</th>
+                <th>Part Name</th>
+                <th>Part Manufacturer</th>
+                <th>Part Price</th>
+                <th>Part Stock</th>
+                <th>Part Edit</th>
+                <th>Part Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr ng-repeat="part in parts">
+                
+                <!-- <td><a ui-sref="korisnikPrikaz({id:p['id']})">{{p["ime"]}}</a></td> -->
+                <td>{{part["part_id"]}}</td>
+                <td>{{part["part_name"]}}</td>
+                <td>{{part["part_manufacturer"]}}</td>
+                <td>{{part["part_price"]}}</td>
+                <td>{{part["part_stock"]}}</td>
+                <td> <a ui-sref="editPart({part_id: part['part_id']})">Edit</a></td>
+                <td><button class="btn btn-active" ng-click="pctrl.deletePart(part['part_id'])">Delete</button></td>
+                <!-- <td><button class="btn btn-active" ng-click="pctrl.deleteorder(order['order_id'])">Cancle</button></td>
+                <td><button class="btn btn-active" ng-click="pctrl.completeorder(order['order_id'])">Complete</button></td> -->
+                <!-- <td><button class="btn btn-info" ng-click="partShow({part_id: part['part_id']})">Order</button></td> -->
                 <!-- <td> <a ui-sref="izmenaKorisnika({id: p['id']})">Izmeni</a></td> -->
             </tr>
         </tbody>
     </table>
     <br>
-    <h3>Completed Orders</h3>
     <br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Order Price</th>
-                <th>Part ID</th>
-                <th>Order Adress</th>
-            </tr>
-        </thead>
-        <tbody>
-           
-            <tr ng-repeat="orderDone in ordersDone">
-                
-                <td>{{orderDone["order_id"]}}</td>
-                <td>{{orderDone["order_price"]}}</td>
-                <td><button class="btn btn-active" ng-click="pctrl.showpart(orderDone['order_id'])">Parts</button></td>
-                <td><button class="btn btn-active" ng-click="pctrl.showadress(orderDone['adress_adress_id'])">{{orderDone["adress_adress_id"]}}</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <a ui-sref="newPart">Add New Part</a>
+
  </div>

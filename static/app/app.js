@@ -62,6 +62,24 @@
             controller: "adminCtrl",
             controllerAs: "pctrl"
         }).state({
+            name: "editPart",
+            url: "/editPartCtrl/{part_id}",
+            templateUrl: "app/components/editPart/editPart.tpl.html",
+            controller: "editPartCtrl",
+            controllerAs: "pctrl"
+        }).state({
+            name: "newPart",
+            url: "/newPartCtrl",
+            templateUrl: "app/components/newPart/newPart.tpl.html",
+            controller: "newPartCtrl",
+            controllerAs: "pctrl"
+        }).state({
+            name: "about",
+            url: "/aboutCtrl",
+            templateUrl: "app/components/about/about.tpl.html",
+            controller: "aboutCtrl",
+            controllerAs: "pctrl"
+        }).state({
             name: "orderPart",
             url: "/orderPartCtrl",
             templateUrl: "app/components/orderPart/orderPart.tpl.html",

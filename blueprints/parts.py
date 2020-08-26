@@ -61,3 +61,55 @@ def search_part(part_search):
 
     parts = cursor.fetchall()
     return flask.jsonify(parts)
+
+#! Delete Part
+
+@parts_blueprint.route("/part/<int:part_id>", methods=['DELETE'])
+def delete_part(part_id):
+
+    temp = None
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    cursor.execute("SELECT * FROM orders_has_pc_parts WHERE pc_parts_part_id=%s", (part_id))
+
+    temp = cursor.fetchall()
+
+    print("USO USO USO")
+
+    cursor.execute("DELETE FROM pc_parts WHERE part_id=%s", (part_id))
+
+    db.commit()
+
+
+    return "", 204
+
+#! New Part
+
+@parts_blueprint.route("/part", methods=['POST'])
+def new_part():
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    print(flask.request.json)
+
+    cursor.execute("INSERT INTO pc_parts(part_name, part_price, part_stock, part_manufacturer, part_warranty, part_info) VALUES(%(part_name)s, %(part_price)s, %(part_stock)s, %(part_manufacturer)s, %(part_warranty)s, %(part_info)s)", flask.request.json)
+
+    db.commit()
+
+    return flask.jsonify(flask.request.json), 201
+
+#! Edit Part
+
+@parts_blueprint.route("/part/<int:part_id>", methods=['PUT'])
+def edit_part(part_id):
+    db = mysql.get_db()
+    cursor = db.cursor()
+
+    print(flask.request.json)
+
+    cursor.execute("UPDATE pc_parts SET part_name=%(part_name)s, part_price=%(part_price)s, part_stock=%(part_stock)s, part_manufacturer=%(part_manufacturer)s, part_warranty=%(part_warranty)s, part_info=%(part_info)s WHERE part_id=%(part_id)s", flask.request.json[0])
+
+    db.commit()
+
+    return flask.jsonify(flask.request.json), 201

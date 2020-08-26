@@ -85,6 +85,7 @@
             },
             function(reason){
                 console.log(reason);
+                window.alert("Unabel to show part because it is removed from the store")
             })
         }
 

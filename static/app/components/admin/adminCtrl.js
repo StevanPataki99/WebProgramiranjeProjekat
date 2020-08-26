@@ -9,6 +9,8 @@
         $scope.userData = null;
         $scope.orders = null;
         $scope.ordersDone = null;
+        $scope.parts = null;
+
 
         this.getCurrentUserId = function() {
             $http.get("api/currentUser").then(function(result){
@@ -35,6 +37,7 @@
                 if ($scope.userData[0]['user_admin'] == 1){
                     console.log('WELCOME ADMIN')
                     that.getOrders();
+                    that.getParts();
                 }else{
                     window.alert("You are not an Admin");
                     $state.go('home');
@@ -102,6 +105,42 @@
                 console.log(reason);
             })
         }
+
+        this.getParts = function(){
+            $http.get("api/parts").then(function(result){
+                console.log(result);
+                $scope.parts = result.data;
+                console.log(part_orders);
+            },
+            function(reason){
+                console.log(reason);
+            })
+        }
+
+        this.editPart = function(part_id){
+            $http.get("api/parts").then(function(result){
+                console.log(result);
+                $scope.parts = result.data;
+                console.log(part_orders);
+            },
+            function(reason){
+                console.log(reason);
+            })
+        }
+
+        this.deletePart= function(part_id){
+            $http.delete("api/part/" + part_id).then(function(result){
+                console.log(result);
+                $state.reload();
+            },
+            function(reason){
+                console.log(reason);
+                window.alert("This item is orderd so it is not able to be deleted")
+            })
+        }
+        
+
+        
 
         this.getCurrentUserId();
 
