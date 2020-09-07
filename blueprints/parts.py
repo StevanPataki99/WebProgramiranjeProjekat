@@ -1,4 +1,6 @@
 import flask
+import os
+from werkzeug import secure_filename
 from flask.blueprints import Blueprint
 
 from utils.db import mysql
@@ -93,7 +95,7 @@ def new_part():
 
     print(flask.request.json)
 
-    cursor.execute("INSERT INTO pc_parts(part_name, part_price, part_stock, part_manufacturer, part_warranty, part_info) VALUES(%(part_name)s, %(part_price)s, %(part_stock)s, %(part_manufacturer)s, %(part_warranty)s, %(part_info)s)", flask.request.json)
+    cursor.execute("INSERT INTO pc_parts(part_name, part_price, part_stock, part_manufacturer, part_warranty, part_info, part_image) VALUES(%(part_name)s, %(part_price)s, %(part_stock)s, %(part_manufacturer)s, %(part_warranty)s, %(part_info)s, %(part_image)s)", flask.request.json)
 
     db.commit()
 
